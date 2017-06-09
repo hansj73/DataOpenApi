@@ -7,7 +7,11 @@ public class DataApiExplorer {
 		 DataApiDB.DbDriverLoad();
 		 DataApiDB.getConnection();
 		
-		 AreaBasedListExplorer.AreadBasedList();
+//		 AreaBasedListExplorer.AreadBasedList();
+		String total=getTotalApiExplorer.getSearcTotal();
+		
+		
+		searchFestivalExplorer.searchFestivalList(total);
 		
 		
 	}	

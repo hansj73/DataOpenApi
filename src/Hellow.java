@@ -73,21 +73,29 @@ public class Hellow {
       	String mTime = mSimpleDateFormat.format ( currentTime );
       	System.out.println ( mTime );
 
-      	Calendar cal = Calendar.getInstance();
+      Calendar cal = Calendar.getInstance();
       	 
-   /*   //현재 년도, 월, 일
+      //현재 년도, 월, 일
       int year = cal.get ( cal.YEAR );
       int month = cal.get ( cal.MONTH ) + 1 ;
       int date = cal.get ( cal.DATE ) ;
       	
-      System.out.println("year::"+year+"month"+month);
+      int startDay = cal.get(cal.DAY_OF_MONTH);
+      int endDay = cal.getActualMaximum(cal.DAY_OF_MONTH); 
+      
+      
+      String smonth=(month<10)?"0"+month:month+"";
+      String fromYMD = year+""+smonth+""+"01";
+      String toYMD = year+""+smonth+""+endDay;
+      
+      System.out.println("fromYMD::"+fromYMD+":::month::"+toYMD);
       
       
       Date date1 = new Date();
       
-      System.out.println(date1);*/
+      System.out.println(date1);
       
-      
+   /*   
       SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
       Calendar c1 = Calendar.getInstance();
 	 String strToday = sdf.format(c1.getTime());
@@ -115,15 +123,15 @@ public class Hellow {
  	String[] ff=firstImageUrlThum.replaceAll("http://tong.visitkorea.or.kr/cms/resource/", "").split("/");
  	System.out.println("::::fff:::::"+ff[0]+":::"+ff[1]);
  	
- 	/*String[] fff = ff.split("/");
+ 	String[] fff = ff.split("/");
  	
- 	System.out.println(":::fff:::"+fff[0]+"::::"+fff[1]);*/
+ 	System.out.println(":::fff:::"+fff[0]+"::::"+fff[1]);
  			
- 	/*int aa=firstImageUrlThum.lastIndexOf('/');
+ 	int aa=firstImageUrlThum.lastIndexOf('/');
  	System.out.println("::::"+firstImageUrlThum.length());
  	
  	System.out.println("::::"+firstImageUrlThum.substring(firstImageUrlThum.lastIndexOf('/')+1,firstImageUrlThum.length()));
- 	String lastFileName=firstImageUrlThum.substring(firstImageUrlThum.lastIndexOf('/')+1,firstImageUrlThum.length());*/
+ 	String lastFileName=firstImageUrlThum.substring(firstImageUrlThum.lastIndexOf('/')+1,firstImageUrlThum.length());
  	
 	String contentTypeId="15";
 	String firstImagerUrl2=DataUtil.getProperty("firstImageUrl2"); // 썸네일이미지
@@ -137,7 +145,9 @@ public class Hellow {
   	System.out.println(":::::::firstImagerUrl2:::"+firstImagerUrl2);
   	System.out.println(":::::::cultureUrl:::"+cultureUrl);
   	System.out.println(":::::::firstImageUrlThum:::"+firstImageUrlThum);
-
+*/  	
+  	
+  
 	}
 	
 	

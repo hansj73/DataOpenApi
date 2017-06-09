@@ -1,19 +1,10 @@
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 
 
 public class DataApiDB {
@@ -51,7 +42,7 @@ public class DataApiDB {
 		            // 콘솔 출력
 //		            System.out.println(driverClass+":"+url+":"+username+":"+password) ;
 		            con = DriverManager.getConnection(url,username, password);
-		            System.out.println("커넥션 성공");
+//		            System.out.println("커넥션 성공");
 		           
 	        	
 	        	}catch(Exception e){
@@ -81,7 +72,7 @@ public class DataApiDB {
 	           	stmt = con.createStatement();
 	              //데이터를 가져온다.
 	           	/**
-	           	 * type 50  축제
+	           	 * type 50  축제/행사
 	           	 * 	           	 
 	           	 * */
 	           	
@@ -121,7 +112,9 @@ public class DataApiDB {
 	              	}else{
 	              		firstImageUrlThum="";
 	              	}
-	              	System.out.println(":::::::firstImageUrlThum:::"+firstImageUrlThum);
+	              	/*System.out.println(":::::::firstImageUrlThum:::"+firstImageUrlThum);*/
+	              	
+	              	long uci_time = System.currentTimeMillis();
 	              	/** 장르 코드변환***//*
 	              	String genreCode=KopisApiExplorer.getGenreCode(Api_detail.get(0).getGenrenm()); // 장르 코드 분류추가 
 */	              			
@@ -132,15 +125,15 @@ public class DataApiDB {
 	              	sb.append(",DESCRIPTION,REFERENCE,RIGHTS");
 	              	sb.append(",INSERT_DATE,VENUE,PERIOD");
 	              	sb.append(",REFERENCE_IDENTIFIER_ORG,APPROVAL,GENRE");
-	              	sb.append(")");
+	              	sb.append(",UCI)");
 	              	sb.append("VALUES");
 	              	sb.append("(");
-	              	sb.append("OPENAPI_METADATA_SEQUENCE.NEXTVAL,'"+title+"','"+boardDto.getContenttypeid()+"'");
+	              	sb.append("EVENT_FASTIVAL_SEQ.NEXTVAL,'"+title+"','"+boardDto.getContenttypeid()+"'");
 	              	sb.append(",'"+boardDto.getContentid()+"',sysdate,'50'");
 	              	sb.append(",'"+description+"','"+boardDto.getSponsor1tel()+"','"+boardDto.getSponser1()+"'");
 	              	sb.append(",sysdate,'"+boardDto.getEventplace()+"','"+period+"'");
 	              	sb.append(",'"+firstImageUrlThum+"','W','1'");
-	              	sb.append(")");
+	              	sb.append(",'G706"+uci_time+"')");
 	              	
 	                          	  
 	              	System.out.println("::SQL:::"+sb.toString());
@@ -155,7 +148,7 @@ public class DataApiDB {
 						e.printStackTrace();
 					}
 	              	
-	              	System.out.println("파일 입력 및 이미지 저장 완료");
+//	              	System.out.println("파일 입력 및 이미지 저장 완료");
 	              }
 	            	else if(cnt>0)
 	            	{

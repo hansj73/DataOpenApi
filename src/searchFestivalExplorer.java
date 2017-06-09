@@ -20,14 +20,14 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 
-public class AreaBasedListExplorer {
+public class searchFestivalExplorer {
 	
 	
-    public static void AreadBasedList(){  
+    public static void searchFestivalList(String total){  
 		
 		
 		  try {
-			String apiXml= areaBasedListApi();
+			String apiXml= areaBasedListApi(total);
 			
 			ArrayList<boardListDto> list=areaBasedListXML(apiXml);
 			
@@ -52,11 +52,11 @@ public class AreaBasedListExplorer {
 				 * totalCount,pageNo,numOfRows
 				 */
 		        /** 리스트  총 갯수 , 페이지 1, 페이지 row**/
-				ArrayList<boardListDto> listData=areaBasedListEtcElement(apiXml);
+				/*ArrayList<boardListDto> listData=areaBasedListEtcElement(apiXml);
 					
 				System.out.println("::listData::"+listData.get(0).getTotalCount());
 				System.out.println("::listData::"+listData.get(0).getPageNo());
-				System.out.println("::listData::"+listData.get(0).getNumOfRows());
+				System.out.println("::listData::"+listData.get(0).getNumOfRows());*/
 					
 				
 			
@@ -68,7 +68,7 @@ public class AreaBasedListExplorer {
     }
 	
 	
-	public static String areaBasedListApi() throws IOException{
+	public static String areaBasedListApi(String total) throws IOException{
 		 
 		    /**
 		     * arrange  정렬구분
@@ -83,16 +83,18 @@ public class AreaBasedListExplorer {
 		 	String cat1=DataUtil.getProperty("cat1");// 대분류
 		 	String cat2=DataUtil.getProperty("cat2");// 중분류
 		 	String arrange=DataUtil.getProperty("arrange");// 정렬구분
-		 	String numOfRows=DataUtil.getProperty("numOfRows");// 페이지갯수
+//		 	String numOfRows=DataUtil.getProperty("numOfRows");// 페이지갯수
+		 	String numOfRows=total;// 페이지갯수
 		
-			StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"); 
-		    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") +serviceKey); /*Service Key*/
-	        urlBuilder.append("&contentTypeId="+contentTypeId+"&areaCode=&sigunguCode=&listYN=Y&MobileOS=ETC&MobileApp=web");
+		 	String[] SEdate = DataUtil.SEdate().split(":");
+		 	
+			StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"); 
+	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") +serviceKey); /*Service Key*/
+	        urlBuilder.append("&eventStartDate="+SEdate[0]+"&eventEndDate="+SEdate[1]+"");
 	        urlBuilder.append("&areaCode=&sigunguCode=&listYN=Y&MobileOS=ETC&MobileApp=web");
 	        urlBuilder.append("&arrange="+arrange+"&numOfRows="+numOfRows+"&pageNo=1");
 	        urlBuilder.append("&cat1="+cat1+"&cat2="+cat2+""); // 축제 cat1=A02 축제 중분류 cat2=A0207 축제
-	        /*urlBuilder.append("&cat1=A02&cat2=A0208"); // 공연/행사  cat2=A*/
-//	        /*System.out.println("::url::"+urlBuilder.toString());*/
+	        /*System.out.println("::url::"+urlBuilder.toString());*/
 	        URL url = new URL(urlBuilder.toString());
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
@@ -214,7 +216,7 @@ public class AreaBasedListExplorer {
 		boardListDto bDto = new boardListDto();
 		
 		for(int i=0; i<detailIntro.size(); i++){
-			System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());
+			/*System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());*/
 			bDto.setEventplace(detailIntro.get(i).getEventplace());
 			bDto.setSponser1(detailIntro.get(i).getSponser1());
 			bDto.setSponsor1tel(detailIntro.get(i).getSponsor1tel());

@@ -59,7 +59,7 @@ public class DetailIntroExplorer {
 	        urlBuilder.append("&MobileOS=ETC&MobileApp=web&introYN=Y");
 	        urlBuilder.append("&contentTypeId="+contentTypeId+"&contentId="+contentId+""); 
 	        
-	        System.out.println("::url::"+urlBuilder.toString());
+	        /*System.out.println("::url::"+urlBuilder.toString());*/
 	        URL url = new URL(urlBuilder.toString());
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");

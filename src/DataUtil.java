@@ -94,10 +94,10 @@ public class DataUtil {
 			    
 //				String localPath=DataUtil.getProperty("ImageSaveDir");
 
-				System.out.println("::::EtcImageWrite::"+targetUrl);
+				/*System.out.println("::::EtcImageWrite::"+targetUrl);
 				System.out.println("::::localPath::"+localPath);
 				System.out.println("::::localPath_fullpath::"+localPath+"/"+file.getName());
-				
+				*/
 				
 			    FileOutputStream in = new FileOutputStream(localPath+"/"+file.getName());		  
 			    URL url = new URL(targetUrl);
@@ -122,7 +122,7 @@ public static String  TagImageSrc(String overview,String imgUrl,String contentTy
 		     
 		 	 imgUrl1=DataUtil.ImageRename(imgUrl1);
 		     
-		     System.out.println("::::TagImageSrc::"+imgUrl1);
+//		     System.out.println("::::TagImageSrc::"+imgUrl1);
 		    		 
 		 	 StringBuffer sb = new StringBuffer();
 		     sb.append("<p>");
@@ -132,9 +132,13 @@ public static String  TagImageSrc(String overview,String imgUrl,String contentTy
 	        	
 //	        	for(String i: iUrl){
 //	        		if(!"".equals(i)){
-	        			EtcImageWriteConent(imgUrl1,localPath); // 이미지 저장하기
-	        			sb.append("<img src=\""+imgUrl1+"\"/><br/>");
-	        			sb.append(overview);
+			 		 if(!"".equals(imgUrl1))
+			 		 {
+		        			EtcImageWriteConent(imgUrl1,localPath); // 이미지 저장하기
+		        			sb.append("<img src=\""+imgUrl1+"\" alt=\""+overview+"\"/>");
+			 		 }else{
+			 			 sb.append(overview);
+			 		 }
 //	        		}
 //	        	}
 	        	sb.append("</p>");
@@ -158,7 +162,7 @@ public static void EtcImageWriteConent(String targetUrl,String localPath)throws 
 //		String localPath=DataUtil.getProperty("ImageSaveDir");
 //		String localPath=ImagSaveDir;
 		
-		System.out.println(":::::::::localPath_EtcImageWriteConent:::::"+localPath);
+//		System.out.println(":::::::::localPath_EtcImageWriteConent:::::"+localPath);
 		
 		
 	    FileOutputStream in = new FileOutputStream(localPath+"/"+file.getName());
@@ -171,7 +175,7 @@ public static void EtcImageWriteConent(String targetUrl,String localPath)throws 
 	    }
 	    in.close();
 	 
-	 System.out.println("::::EtcImageWriteConent::"+targetUrl);
+//	 System.out.println("::::EtcImageWriteConent::"+targetUrl);
 }
 
    
@@ -227,6 +231,26 @@ public static void EtcImageWriteConent(String targetUrl,String localPath)throws 
 		  	
 		     
 		     return firstImageUrlThum;
+	}
+	
+	public static String SEdate() {
+		
+		  Calendar cal = Calendar.getInstance();
+	      	 
+	      //현재 년도, 월, 일
+	      int year = cal.get ( cal.YEAR );
+	      int month = cal.get ( cal.MONTH ) + 1 ;
+	      int date = cal.get ( cal.DATE ) ;
+	      	
+	      int startDay = cal.get(cal.DAY_OF_MONTH);
+	      int endDay = cal.getActualMaximum(cal.DAY_OF_MONTH); 
+	      
+	      
+	      String smonth=(month<10)?"0"+month:month+"";
+	      String fromYMD = year+""+smonth+""+"01";
+	      String toYMD = year+""+smonth+""+endDay;
+	      
+	      return fromYMD+":"+toYMD;
 	}
 
 }
