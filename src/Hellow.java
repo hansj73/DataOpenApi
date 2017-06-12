@@ -1,4 +1,5 @@
 import java.io.File;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -6,10 +7,34 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
+
+
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+
+
+
 
 public class Hellow {
 
+	//private static final Logger logger = LoggerFactory.getLogger(Hellow.class);
+	
+	private static final Logger logger = Logger.getLogger(Hellow.class);
+
+	
 	public static void main(String[] args) {
+		
+		 String filename = System.getProperty("G:/study/workspace/DataOpenApilog4j.xml");
+		 
+		 ClassLoader cl=ClassLoader.getSystemClassLoader();
+         URL url = cl.getResource( "log4j.xml" );
+         
+		 System.out.println("::filename::"+url.getPath());
+		 //File file = new File(filename);
+//		 PropertyConfigurator.configure(url.getFile());
+		 DOMConfigurator.configure(url.getFile());
 		// TODO Auto-generated method stub
 
 		Map<Integer,String> m1=new HashMap<Integer,String>();
@@ -147,6 +172,7 @@ public class Hellow {
   	System.out.println(":::::::firstImageUrlThum:::"+firstImageUrlThum);
 */  	
   	
+      logger.debug("::::date1:::"+date1);
   
 	}
 	

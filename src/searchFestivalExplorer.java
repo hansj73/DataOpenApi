@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -22,9 +23,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class searchFestivalExplorer {
 	
+	private static final Logger logger = Logger.getLogger(searchFestivalExplorer.class);
 	
     public static void searchFestivalList(String total){  
 		
+    	   boolean inTrue=false;
+    	   int inTrueCnt=0;
 		
 		  try {
 			String apiXml= areaBasedListApi(total);
@@ -44,8 +48,11 @@ public class searchFestivalExplorer {
 					  System.out.println(":::장소:::"+detailIntro.get(key).get(j).getEventplace());
 					  System.out.println(":::주소:::"+detailCommon.get(key).get(j).getAddr1());
 				  }*/
-				  ApiDataInput(detailIntro.get(key),detailCommon.get(key));
+				  inTrue=ApiDataInput(detailIntro.get(key),detailCommon.get(key));
+				  if(inTrue==true)inTrueCnt=inTrueCnt+1;
 			  }
+			  
+			  logger.debug(":::insert 갯수:::"+inTrueCnt);
 		       
 				/**
 				 * return 
@@ -211,9 +218,11 @@ public class searchFestivalExplorer {
 		return arrayList;
     }
 	
-	public static void ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon ) throws IOException{
+	public static boolean ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon ) throws IOException{
 		
 		boardListDto bDto = new boardListDto();
+		boolean inTrue=false;
+		
 		
 		for(int i=0; i<detailIntro.size(); i++){
 			/*System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());*/
@@ -234,9 +243,11 @@ public class searchFestivalExplorer {
 			bDto.setContenttypeid(detailCommon.get(i).getContenttypeid());
 			bDto.setTitle(detailCommon.get(i).getTitle());
 			
-			DataApiDB.regApiData(bDto);
+			inTrue=DataApiDB.regApiData(bDto);
 			
 		}
+		return inTrue;
+//		 logger.debug(":::insert 갯수:::"+inTrueCnt);
 	}
 	
 		

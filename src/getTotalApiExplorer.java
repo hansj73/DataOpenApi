@@ -23,7 +23,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class getTotalApiExplorer {
 	
 	
-    public static String getSearcTotal(){  
+    public static String getSearchTotal(){  
 		
 		   String total="";
 		  try {
@@ -253,12 +253,12 @@ public class getTotalApiExplorer {
 		return arrayList;
     }
 	
-	public static void ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon ) throws IOException{
+	/*public static void ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon ) throws IOException{
 		
 		boardListDto bDto = new boardListDto();
 		
 		for(int i=0; i<detailIntro.size(); i++){
-			/*System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());*/
+			System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());
 			bDto.setEventplace(detailIntro.get(i).getEventplace());
 			bDto.setSponser1(detailIntro.get(i).getSponser1());
 			bDto.setSponsor1tel(detailIntro.get(i).getSponsor1tel());
@@ -279,7 +279,7 @@ public class getTotalApiExplorer {
 			DataApiDB.regApiData(bDto);
 			
 		}
-	}
+	}*/
 	
 		
 }// class end

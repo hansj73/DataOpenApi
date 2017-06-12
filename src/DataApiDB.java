@@ -23,9 +23,9 @@ public class DataApiDB {
 	    	try{
 	            
 	            Class.forName("oracle.jdbc.driver.OracleDriver");
-	            	System.out.println("드라이버 로딩 성공");
+//	            	System.out.println("드라이버 로딩 성공");
 				} catch (ClassNotFoundException e) {
-					System.out.println("드라이버 로딩 실패");
+//					System.out.println("드라이버 로딩 실패");
 				}
 	    }
 	  
@@ -63,10 +63,12 @@ public class DataApiDB {
 	            }
 	    }
 	  
-	  public  static void regApiData(boardListDto boardDto) throws IOException
+	  public  static boolean regApiData(boardListDto boardDto) throws IOException
 	    {
 	    	  StringBuffer sb = new StringBuffer();
 	    	  StringBuffer sb1 = new StringBuffer();
+	    	  
+	    	  boolean inTrue=false;
 	    	  
 	    	  try{
 	           	stmt = con.createStatement();
@@ -136,8 +138,9 @@ public class DataApiDB {
 	              	sb.append(",'G706"+uci_time+"')");
 	              	
 	                          	  
-	              	System.out.println("::SQL:::"+sb.toString());
+//	              	System.out.println("::SQL:::"+sb.toString());
 	              	stmt.executeUpdate(sb.toString());
+	              	inTrue=true;
 	              	
 	              	try {
 	              		if(!"".equals(boardDto.getFirstimage2())){
@@ -164,6 +167,7 @@ public class DataApiDB {
 	              e.printStackTrace();
 	              System.out.println("::e::"+e);
 	          }
+	    	  return inTrue;
 	        
 	    }
 	  
