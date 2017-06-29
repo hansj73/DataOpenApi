@@ -63,7 +63,7 @@ public class DataApiDB {
 	            }
 	    }
 	  
-	  public  static boolean regApiData(boardListDto boardDto) throws IOException
+	  public  static boolean regApiData(boardListDto boardDto,String cat2) throws IOException
 	    {
 	    	  StringBuffer sb = new StringBuffer();
 	    	  StringBuffer sb1 = new StringBuffer();
@@ -78,14 +78,16 @@ public class DataApiDB {
 	           	 * 	           	 
 	           	 * */
 	           	
-	           	 sb1.append("select count(*) count from OPENAPI_METADATA where ");
+	           	 sb1.append("select count(*) count from PCN_RDF_METADATA where ");
 	           	 sb1.append("sub_title='"+boardDto.getContentid()+"' and type='50' and ALTERNATIVE_TITLE='"+boardDto.getContenttypeid()+"'");
+	           	 //sb1.append("and genre='"+GENRE+"'");
 	      
+	           	//System.out.println(":::sql:::"+sb1.toString());
 	           	 rs = stmt.executeQuery(sb1.toString());
 	              
 	              int cnt=(rs.next()==true)?rs.getInt("count"):-1;
 	              
-//	              System.out.println(":::cnt:::"+cnt);
+	              //System.out.println(":::cnt:::"+cnt);
 	              
 	              if(cnt==0)
 	              {
@@ -120,25 +122,27 @@ public class DataApiDB {
 	              	/** 장르 코드변환***//*
 	              	String genreCode=KopisApiExplorer.getGenreCode(Api_detail.get(0).getGenrenm()); // 장르 코드 분류추가 
 */	              			
-	              	sb.append("INSERT INTO OPENAPI_METADATA");
+	             	String GENRE =("A0207".equals(cat2))?"1":"2";
+	              	
+	              	sb.append("INSERT INTO PCN_RDF_METADATA");
 	              	sb.append("(");
 	              	sb.append("SEQ,TITLE,ALTERNATIVE_TITLE");
 	              	sb.append(",SUB_TITLE,REG_DATE,TYPE");
 	              	sb.append(",DESCRIPTION,REFERENCE,RIGHTS");
 	              	sb.append(",INSERT_DATE,VENUE,PERIOD");
 	              	sb.append(",REFERENCE_IDENTIFIER_ORG,APPROVAL,GENRE");
-	              	sb.append(",UCI)");
+	              	sb.append(",UCI,ADDR1,ADDR2,ZIP_CODE)");
 	              	sb.append("VALUES");
 	              	sb.append("(");
 	              	sb.append("EVENT_FASTIVAL_SEQ.NEXTVAL,'"+title+"','"+boardDto.getContenttypeid()+"'");
 	              	sb.append(",'"+boardDto.getContentid()+"',sysdate,'50'");
 	              	sb.append(",'"+description+"','"+boardDto.getSponsor1tel()+"','"+boardDto.getSponser1()+"'");
 	              	sb.append(",sysdate,'"+boardDto.getEventplace()+"','"+period+"'");
-	              	sb.append(",'"+firstImageUrlThum+"','W','1'");
-	              	sb.append(",'G706"+uci_time+"')");
+	              	sb.append(",'"+firstImageUrlThum+"','W','"+GENRE+"'");
+	              	sb.append(",'G706"+uci_time+"','"+boardDto.getAddr1()+"','"+boardDto.getAddr2()+"','"+boardDto.getZipcode()+"')");
 	              	
 	                          	  
-//	              	System.out.println("::SQL:::"+sb.toString());
+	              	//System.out.println("::SQL:::"+sb.toString());
 	              	stmt.executeUpdate(sb.toString());
 	              	inTrue=true;
 	              	

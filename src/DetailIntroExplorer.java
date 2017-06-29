@@ -59,7 +59,7 @@ public class DetailIntroExplorer {
 	        urlBuilder.append("&MobileOS=ETC&MobileApp=web&introYN=Y");
 	        urlBuilder.append("&contentTypeId="+contentTypeId+"&contentId="+contentId+""); 
 	        
-	        /*System.out.println("::url::"+urlBuilder.toString());*/
+	        //System.out.println("::url::"+urlBuilder.toString());
 	        URL url = new URL(urlBuilder.toString());
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
@@ -104,7 +104,7 @@ public class DetailIntroExplorer {
                         if(startTag.equals("sponsor1tel")) {
                         	openData.setSponsor1tel(parser.nextText());
                         }
-                        if(startTag.equals("sponser1")) {
+                        if(startTag.equals("sponsor1")) {
                         	openData.setSponser1(parser.nextText());
                         }
                         if(startTag.equals("eventplace")) {

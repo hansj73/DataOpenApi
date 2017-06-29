@@ -26,15 +26,15 @@ public class Hellow {
 	
 	public static void main(String[] args) {
 		
-		 String filename = System.getProperty("G:/study/workspace/DataOpenApilog4j.xml");
+		 /*String filename = System.getProperty("G:/study/workspace/DataOpenApilog4j.xml");
 		 
 		 ClassLoader cl=ClassLoader.getSystemClassLoader();
          URL url = cl.getResource( "log4j.xml" );
          
-		 System.out.println("::filename::"+url.getPath());
+		 System.out.println("::filename::"+url.getPath());*/
 		 //File file = new File(filename);
 //		 PropertyConfigurator.configure(url.getFile());
-		 DOMConfigurator.configure(url.getFile());
+//		 DOMConfigurator.configure(url.getFile());
 		// TODO Auto-generated method stub
 
 		Map<Integer,String> m1=new HashMap<Integer,String>();
@@ -93,7 +93,7 @@ public class Hellow {
       	
       	// /년/달/contentId/cat2/파일명
       	
-      	SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yy", Locale.KOREA );
+      /*	SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yy", Locale.KOREA );
       	Date currentTime = new Date ();
       	String mTime = mSimpleDateFormat.format ( currentTime );
       	System.out.println ( mTime );
@@ -118,7 +118,7 @@ public class Hellow {
       
       Date date1 = new Date();
       
-      System.out.println(date1);
+      System.out.println(date1);*/
       
    /*   
       SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
@@ -172,7 +172,7 @@ public class Hellow {
   	System.out.println(":::::::firstImageUrlThum:::"+firstImageUrlThum);
 */  	
   	
-      logger.debug("::::date1:::"+date1);
+//      logger.debug("::::date1:::"+date1);
   
 	}
 	

@@ -130,7 +130,8 @@ public static String  TagImageSrc(String overview,String imgUrl,String contentTy
 		     
 		     String localPath=DataUtil.MkFileDir();
 		     
-		 	 imgUrl1=DataUtil.ImageRename(imgUrl1);
+		 	// imgUrl1=DataUtil.ImageRename(imgUrl1);
+		 	 imgUrl1=DataUtil.ImageContentRename(imgUrl1);
 		     
 //		     System.out.println("::::TagImageSrc::"+imgUrl1);
 		    		 
@@ -144,7 +145,7 @@ public static String  TagImageSrc(String overview,String imgUrl,String contentTy
 //	        		if(!"".equals(i)){
 			 		 if(!"".equals(imgUrl1))
 			 		 {
-		        			EtcImageWriteConent(imgUrl1,localPath); // 이미지 저장하기
+		        			//EtcImageWriteConent(imgUrl1,localPath); // 이미지 저장하기
 		        			sb.append("<img src=\""+imgUrl1+"\" alt=\""+overview+"\"/>");
 			 		 }else{
 			 			 sb.append(overview);
@@ -201,7 +202,8 @@ public static void EtcImageWriteConent(String targetUrl,String localPath)throws 
 		  String year=strToday.substring(0,2);
 		  String month=strToday.substring(2,4);
 		  
-		  String imageSubDir="/"+year+"/"+month+"/"+DataUtil.getProperty("cat2");
+//		  String imageSubDir="/"+year+"/"+month+"/"+DataUtil.getProperty("cat2");
+		  String imageSubDir=year+"/"+month+"/"+DataUtil.getProperty("cat2");
 		  
 		  String ImageSaveDir=DataUtil.getProperty("ImageSaveDir")+imageSubDir; //
 			 
@@ -230,12 +232,37 @@ public static void EtcImageWriteConent(String targetUrl,String localPath)throws 
 		  String year=strToday.substring(0,2);
 		  String month=strToday.substring(2,4);
 		  
-		  String imageSubDir="/"+year+"/"+month+"/"+DataUtil.getProperty("cat2");
+		 // String imageSubDir="/"+year+"/"+month+"/"+DataUtil.getProperty("cat2");
+		  String imageSubDir=year+"/"+month+"/"+DataUtil.getProperty("cat2");
 		  
 		  String[] ff=firstImageUrlThum.replaceAll(DataUtil.getProperty("firstImageUrl2")+"/", "").split("/");
 		  
 		  String firstImagerUrl2=DataUtil.getProperty("firstImageUrl2"); // 썸네일이미지
 		  String cultureUrl=DataUtil.getProperty("cultureSaveUrl")+imageSubDir;
+		  	
+		  firstImageUrlThum=firstImageUrlThum.replaceAll(firstImagerUrl2+"/"+ff[0], cultureUrl);
+		  	
+		     
+		     return firstImageUrlThum;
+	}
+	
+	public static String ImageContentRename(String firstImageUrlThum){
+	    
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
+	      Calendar c1 = Calendar.getInstance();
+		  String strToday = sdf.format(c1.getTime());
+		  
+		  String year=strToday.substring(0,2);
+		  String month=strToday.substring(2,4);
+		  
+		 // String imageSubDir="/"+year+"/"+month+"/"+DataUtil.getProperty("cat2");
+		  String imageSubDir=year+"/"+month+"/"+DataUtil.getProperty("cat2");
+		  
+		  String[] ff=firstImageUrlThum.replaceAll(DataUtil.getProperty("firstImageUrl2")+"/", "").split("/");
+		  
+		  String firstImagerUrl2=DataUtil.getProperty("firstImageUrl2"); // 썸네일이미지
+//		  String cultureUrl=DataUtil.getProperty("cultureSaveUrl")+imageSubDir;
+		  String cultureUrl=DataUtil.getProperty("contentSaveUrl")+imageSubDir;
 		  	
 		  firstImageUrlThum=firstImageUrlThum.replaceAll(firstImagerUrl2+"/"+ff[0], cultureUrl);
 		  	
@@ -262,5 +289,50 @@ public static void EtcImageWriteConent(String targetUrl,String localPath)throws 
 	      
 	      return fromYMD+":"+toYMD;
 	}
+	
+	
+	 public static String getLocation(String str){
+			
+		 	String	loc="";
+		 	String  loc1="";
+		 	
+		 	if ("1".equals(loc)) {// 서울
+		 		loc1="02";
+			}else if ("6".equals(loc)) {//부산
+				loc1="051";
+		 	}else if ("4".equals(loc)) {//대구
+		 		loc1="053";
+			}else if ("2".equals(loc)) {//인천
+				loc1="032";
+			}else if ("3".equals(loc)) {//대전
+				loc1="042";
+			}else if ("5".equals(loc)) {//광주
+				loc1="062";
+			}else if ("7".equals(loc)) {//울산	
+				loc1="052";
+			}else if ("8".equals(loc)) {//세종	
+				loc1="044";
+			}else if ("31".equals(loc)){//경기	
+				loc1="031";
+			}else if ("10".equals(loc)){//강원	
+				loc1="033";
+			}else if ("11".equals(loc)){//충북	
+				loc1="043";
+			}else if ("12".equals(loc)){//충남	
+				loc1="041";
+			}else if ("15".equals(loc)){//전북	
+				loc1="063";
+			}else if ("38".equals(loc)){//전남	
+				loc1="061";
+			}else if ("13".equals(loc)){//경북	
+				loc1="054";
+			}else if ("14".equals(loc)){//경남	
+				loc1="055";
+			}else if ("17".equals(loc)){//제주	
+				loc1="064";
+			}
+		 	
+			return loc1;
+		}
 
 }

@@ -3,9 +3,9 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 
 
-public class DataApiExplorer {
+public class DataApiExplorer207 {
 
-	private static final Logger logger = Logger.getLogger(DataApiExplorer.class);
+	private static final Logger logger = Logger.getLogger(DataApiExplorer207.class);
 	
 	public static void main(String[] args)  {
 		
@@ -15,12 +15,13 @@ public class DataApiExplorer {
 		 DataApiDB.getConnection();
 		
 //		 AreaBasedListExplorer.AreadBasedList();
-		/* logger.debug("::::[start]getTotalApiExplorer:::");
-		String total=getTotalApiExplorer.getSearchTotal();
+		 String cat2="A0207";
+		 logger.debug("::::[start]getTotalApiExplorer:::");
+		String total=getTotalApiExplorer.getSearchTotal(cat2);
 		logger.debug("::::total:::"+total);
 		
 		logger.debug("::::[start]searchFestivalList:::");
-		searchFestivalExplorer.searchFestivalList(total);*/
+		searchFestivalExplorer.searchFestivalList(total,cat2);
 		
 		
 	}	

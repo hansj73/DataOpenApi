@@ -44,7 +44,7 @@ public class AreaBasedListExplorer {
 					  System.out.println(":::장소:::"+detailIntro.get(key).get(j).getEventplace());
 					  System.out.println(":::주소:::"+detailCommon.get(key).get(j).getAddr1());
 				  }*/
-				  ApiDataInput(detailIntro.get(key),detailCommon.get(key));
+//				  ApiDataInput(detailIntro.get(key),detailCommon.get(key));
 			  }
 		       
 				/**
@@ -209,7 +209,7 @@ public class AreaBasedListExplorer {
 		return arrayList;
     }
 	
-	public static void ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon ) throws IOException{
+	public static void ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon,String cat2 ) throws IOException{
 		
 		boardListDto bDto = new boardListDto();
 		
@@ -232,7 +232,7 @@ public class AreaBasedListExplorer {
 			bDto.setContenttypeid(detailCommon.get(i).getContenttypeid());
 			bDto.setTitle(detailCommon.get(i).getTitle());
 			
-			DataApiDB.regApiData(bDto);
+			DataApiDB.regApiData(bDto,cat2);
 			
 		}
 	}

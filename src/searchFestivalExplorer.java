@@ -25,13 +25,13 @@ public class searchFestivalExplorer {
 	
 	private static final Logger logger = Logger.getLogger(searchFestivalExplorer.class);
 	
-    public static void searchFestivalList(String total){  
+    public static void searchFestivalList(String total,String cat2){  
 		
     	   boolean inTrue=false;
     	   int inTrueCnt=0;
 		
 		  try {
-			String apiXml= areaBasedListApi(total);
+			String apiXml= areaBasedListApi(total,cat2);
 			
 			ArrayList<boardListDto> list=areaBasedListXML(apiXml);
 			
@@ -43,12 +43,12 @@ public class searchFestivalExplorer {
 			
 //			  System.out.println("::::detailIntro::"+map3.size());
 			  for(int key:detailCommon.keySet()){
-//				  System.out.println("key"+key+"detail"+detailIntro.get(key));
+				  
 			/*	  for(int j=0; j<detailIntro.get(key).size(); j++){
 					  System.out.println(":::장소:::"+detailIntro.get(key).get(j).getEventplace());
 					  System.out.println(":::주소:::"+detailCommon.get(key).get(j).getAddr1());
 				  }*/
-				  inTrue=ApiDataInput(detailIntro.get(key),detailCommon.get(key));
+				  inTrue=ApiDataInput(detailIntro.get(key),detailCommon.get(key),cat2);
 				  if(inTrue==true)inTrueCnt=inTrueCnt+1;
 			  }
 			  
@@ -75,7 +75,7 @@ public class searchFestivalExplorer {
     }
 	
 	
-	public static String areaBasedListApi(String total) throws IOException{
+	public static String areaBasedListApi(String total,String cat2) throws IOException{
 		 
 		    /**
 		     * arrange  정렬구분
@@ -88,7 +88,7 @@ public class searchFestivalExplorer {
 		 	String serviceKey=DataUtil.getProperty("serviceKey");// serviceKey 인증키
 		 	String contentTypeId=DataUtil.getProperty("contentTypeId");// 타입
 		 	String cat1=DataUtil.getProperty("cat1");// 대분류
-		 	String cat2=DataUtil.getProperty("cat2");// 중분류
+//		 	String cat2=DataUtil.getProperty("cat2");// 중분류
 		 	String arrange=DataUtil.getProperty("arrange");// 정렬구분
 //		 	String numOfRows=DataUtil.getProperty("numOfRows");// 페이지갯수
 		 	String numOfRows=total;// 페이지갯수
@@ -101,7 +101,7 @@ public class searchFestivalExplorer {
 	        urlBuilder.append("&areaCode=&sigunguCode=&listYN=Y&MobileOS=ETC&MobileApp=web");
 	        urlBuilder.append("&arrange="+arrange+"&numOfRows="+numOfRows+"&pageNo=1");
 	        urlBuilder.append("&cat1="+cat1+"&cat2="+cat2+""); // 축제 cat1=A02 축제 중분류 cat2=A0207 축제
-	        /*System.out.println("::url::"+urlBuilder.toString());*/
+//	        System.out.println("::url::"+urlBuilder.toString());
 	        URL url = new URL(urlBuilder.toString());
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
@@ -218,14 +218,15 @@ public class searchFestivalExplorer {
 		return arrayList;
     }
 	
-	public static boolean ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon ) throws IOException{
+	public static boolean ApiDataInput(ArrayList<boardListDto>detailIntro ,ArrayList<boardListDto>detailCommon,String cat2) throws IOException{
 		
+		//System.out.println("::::call::ApiDataInput()::detailIntro.size()::"+detailIntro.size());
 		boardListDto bDto = new boardListDto();
 		boolean inTrue=false;
 		
 		
 		for(int i=0; i<detailIntro.size(); i++){
-			/*System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());*/
+			//System.out.println("::::size::"+detailIntro.get(i).getEventplace()+"::::"+detailCommon.get(i).getAddr1());
 			bDto.setEventplace(detailIntro.get(i).getEventplace());
 			bDto.setSponser1(detailIntro.get(i).getSponser1());
 			bDto.setSponsor1tel(detailIntro.get(i).getSponsor1tel());
@@ -243,7 +244,7 @@ public class searchFestivalExplorer {
 			bDto.setContenttypeid(detailCommon.get(i).getContenttypeid());
 			bDto.setTitle(detailCommon.get(i).getTitle());
 			
-			inTrue=DataApiDB.regApiData(bDto);
+			inTrue=DataApiDB.regApiData(bDto,cat2);
 			
 		}
 		return inTrue;

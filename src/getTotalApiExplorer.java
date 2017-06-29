@@ -23,11 +23,11 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class getTotalApiExplorer {
 	
 	
-    public static String getSearchTotal(){  
+    public static String getSearchTotal(String cat2){  
 		
 		   String total="";
 		  try {
-			String apiXml= getSearchTotalApi();
+			String apiXml= getSearchTotalApi(cat2);
 			
 /*			ArrayList<boardListDto> list=areaBasedListXML(apiXml);
 			
@@ -112,7 +112,7 @@ public class getTotalApiExplorer {
 		
 	}
 	
-	public static String getSearchTotalApi() throws IOException{
+	public static String getSearchTotalApi(String cat2) throws IOException{
 		 
 	    /**
 	     * arrange  정렬구분
@@ -125,7 +125,7 @@ public class getTotalApiExplorer {
 	 	String serviceKey=DataUtil.getProperty("serviceKey");// serviceKey 인증키
 	 	String contentTypeId=DataUtil.getProperty("contentTypeId");// 타입
 	 	String cat1=DataUtil.getProperty("cat1");// 대분류
-	 	String cat2=DataUtil.getProperty("cat2");// 중분류
+//	 	String cat2=DataUtil.getProperty("cat2");// 중분류
 	 	String arrange=DataUtil.getProperty("arrange");// 정렬구분
 	 	String numOfRows=DataUtil.getProperty("numOfRows");// 페이지갯수
 		String[] SEdate = DataUtil.SEdate().split(":");
@@ -136,7 +136,7 @@ public class getTotalApiExplorer {
         urlBuilder.append("&areaCode=&sigunguCode=&listYN=Y&MobileOS=ETC&MobileApp=web");
         urlBuilder.append("&arrange="+arrange+"&numOfRows=1&pageNo=1");
         urlBuilder.append("&cat1="+cat1+"&cat2="+cat2+""); // 축제 cat1=A02 축제 중분류 cat2=A0207 축제
-//        /*System.out.println("::url::"+urlBuilder.toString());*/
+        //System.out.println("::url::"+urlBuilder.toString());
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
